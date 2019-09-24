@@ -22,5 +22,10 @@
     <Folder Include="Modules\Developers\Views\" />
     <Folder Include="Modules\Developers\ViewModels\" />
     <Folder Include="Base\" />
+    <Folder Include="Connectivity\" />
+    <Folder Include="Connectivity\Apis\" />
+    <Folder Include="Models\" />
+    <Folder Include="Keys\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 </Project>
