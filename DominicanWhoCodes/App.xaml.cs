@@ -6,16 +6,17 @@ namespace DominicanWhoCodes
 {
     public partial class App : Application
     {
+        AppBootstrapper bootstrapper;
         public App()
         {
-            InitializeComponent();
-
-            MainPage = new MainPage();
+            InitializeComponent();           
         }
 
-        protected override void OnStart()
+        protected override  void OnStart()
         {
-            // Handle when your app starts
+            bootstrapper = new AppBootstrapper();
+
+            MainPage = bootstrapper.CreateMainPage();
         }
 
         protected override void OnSleep()
