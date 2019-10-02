@@ -10,7 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.778454" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Refit" Version="4.7.51" />
+    <PackageReference Include="ReactiveUI.Events.XamForms" Version="10.3.1" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="10.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\" />
+    <Folder Include="Modules\Developers\" />
+    <Folder Include="Modules\Developers\Views\" />
+    <Folder Include="Modules\Developers\ViewModels\" />
+    <Folder Include="Base\" />
   </ItemGroup>
 </Project>
