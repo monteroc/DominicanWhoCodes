@@ -1,5 +1,6 @@
 ﻿using System;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using Splat;
 
 namespace DominicanWhoCodes.Base
@@ -8,6 +9,9 @@ namespace DominicanWhoCodes.Base
     {
         public RoutingState Router { get; protected set; }
 
+        [Reactive]
+        public string Title { get; set; }
+       
         public BaseViewModel(IScreen hostScreen = null)
         {
             HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();

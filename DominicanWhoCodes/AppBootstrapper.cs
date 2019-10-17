@@ -16,7 +16,7 @@ namespace DominicanWhoCodes
 
         public AppBootstrapper()
         {
-            RegisterDependencies(); 
+            RegisterDependencies();
         }
 
         private void RegisterDependencies()
@@ -26,7 +26,7 @@ namespace DominicanWhoCodes
 
             //Services
             Locator.CurrentMutable.RegisterLazySingleton(() => new ApiService(), typeof(IApiService));
-
+           
             // Views and ViewModels
             Locator.CurrentMutable.Register(() => new DevelopersPage(), typeof(IViewFor<DevelopersViewModel>));
         }

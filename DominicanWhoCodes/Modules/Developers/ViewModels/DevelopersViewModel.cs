@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using DominicanWhoCodes.Base;
 using DominicanWhoCodes.Connectivity.Apis;
+using DominicanWhoCodes.Models;
+using DynamicData;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using Splat;
 using Xamarin.Forms;
 
@@ -14,25 +18,22 @@ namespace DominicanWhoCodes.Modules.Developers.ViewModels
     {
         private readonly IApiService _apiService;
 
-        private string _welcomeText;
-        public string WelcomeText
-        {
-            get => _welcomeText;
-            set => this.RaiseAndSetIfChanged(ref _welcomeText, value);
-        }
+        [Reactive]
+        public ObservableCollection<Developer> Developers { get; set; }
 
         public DevelopersViewModel(IApiService apiService)
         {
             _apiService = apiService;
-
-            DisplayDominicanDevelopersCount();
+           
+            LoadData();
         }
 
-        public async void DisplayDominicanDevelopersCount()
+        public async void LoadData()
         {
-            var data = await _apiService.DWCApi.GetDevelopers();
+            Title = "DominicanWho.Codes";
 
-            WelcomeText = $"We have {data?.Count()} developers registered.";
+            var data = await _apiService.DWCApi.GetDevelopers();          
+            Developers =new ObservableCollection<Developer>(data);
         }
     }
 }
