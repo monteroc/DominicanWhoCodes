@@ -13,13 +13,18 @@ namespace DominicanWhoCodes.Modules.Developers.Views
         public DevelopersPage()
         {
             InitializeComponent();
-
+           
             this.WhenActivated(
                 disposables =>
                 {
                     this.OneWayBind(this.ViewModel,
-                           x => x.WelcomeText,
-                           x => x.welcomeLbl.Text)
+                       x => x.Developers,
+                       x => x.developersList.ItemsSource)
+                    .DisposeWith(disposables);
+
+                    this.OneWayBind(this.ViewModel,
+                       x => x.Title,
+                       x => x.navTitle.NavigationTitle)
                     .DisposeWith(disposables);
 
                 });           

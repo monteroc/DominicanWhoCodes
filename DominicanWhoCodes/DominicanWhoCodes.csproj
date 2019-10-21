@@ -15,6 +15,12 @@
     <PackageReference Include="Refit" Version="4.7.51" />
     <PackageReference Include="ReactiveUI.Events.XamForms" Version="10.3.1" />
     <PackageReference Include="ReactiveUI.XamForms" Version="10.3.1" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.3.4" />
+    <PackageReference Include="Sharpnado.Forms.HorizontalListView" Version="1.3.0" />
+    <PackageReference Include="ReactiveUI.Fody" Version="10.5.7" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Modules\" />
@@ -27,5 +33,10 @@
     <Folder Include="Models\" />
     <Folder Include="Keys\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Modules\Developers\Views\Cells\" />
+    <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="FodyWeavers.xml" />
   </ItemGroup>
 </Project>
