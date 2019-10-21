@@ -35,6 +35,10 @@
     <Folder Include="Helpers\" />
     <Folder Include="Modules\Developers\Views\Cells\" />
     <Folder Include="Controls\" />
+    <Folder Include="Helpers\Converters\" />
+    <Folder Include="Services\" />
+    <Folder Include="Config\" />
+    <Folder Include="Modules\Developers\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="FodyWeavers.xml" />

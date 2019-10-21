@@ -12,7 +12,7 @@
         <!-- colorPrimary is used for the default action bar background -->
         <item name="colorPrimary">#ffffff</item>
         <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorPrimaryDark">#ffffff</item>
         <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
         <item name="colorAccent">#FF4081</item>
@@ -21,7 +21,9 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
 
+        <item name="android:windowLightStatusBar">true</item> 
     </style>
+   
     <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">#FF4081</item>
     </style>
