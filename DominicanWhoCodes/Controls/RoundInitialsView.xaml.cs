@@ -13,7 +13,7 @@ namespace DominicanWhoCodes.Controls
         }
 
         public static readonly BindableProperty NameInitialsProperty =
-            BindableProperty.Create("NameInitials", typeof(string), typeof(RoundInitialsView), "", propertyChanged: OnNameInitialsChanged);
+            BindableProperty.Create("NameInitials", typeof(string), typeof(RoundInitialsView), string.Empty, propertyChanged: OnNameInitialsChanged);
 
 
         public RoundInitialsView()
