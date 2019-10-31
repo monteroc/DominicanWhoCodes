@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using FFImageLoading.Forms.Platform;
 using Sharpnado.Presentation.Forms.Droid;
+using Plugin.CurrentActivity;
 
 namespace DominicanWhoCodes.Droid
 {
@@ -22,6 +23,7 @@ namespace DominicanWhoCodes.Droid
             base.OnCreate(savedInstanceState);
             CachedImageRenderer.Init(enableFastRenderer:true);
             CachedImageRenderer.InitImageViewHandler();
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 

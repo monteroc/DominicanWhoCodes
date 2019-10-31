@@ -24,14 +24,13 @@ namespace DominicanWhoCodes.Models
 
         public List<string> DisplaySkills => GetSkillsToDisplay(Skills);
 
-
         private string GetImageUrl(string relativeimageUrl)
         {
             return relativeimageUrl.Contains("http") ?
                                         relativeimageUrl :
                                         $"{Constants.BaseUrl}{relativeimageUrl}";
         }
-
+ 
         private List<string> GetSkillsToDisplay(string skills)
         {
             return skills.Split(',').Select(t => t).ToList();

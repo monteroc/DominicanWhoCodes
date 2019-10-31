@@ -1,4 +1,5 @@
 ﻿using System;
+using DominicanWhoCodes.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Splat;
@@ -11,50 +12,40 @@ namespace DominicanWhoCodes.Base
 
         [Reactive]
         public string Title { get; set; }
-       
+
         public BaseViewModel(IScreen hostScreen = null)
         {
             HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
         }
 
-        public string UrlPathSegment
-        {
-            get;
-            protected set;
-        }
+        public string UrlPathSegment { get; protected set; }
 
-        public IScreen HostScreen
-        {
-            get;
-            protected set;
-        }
-
+        public IScreen HostScreen { get; protected set; }
 
         public void NavigateToPage(IRoutableViewModel routableViewModel, bool cleanNavigationStack = false)
         {
-            Router = new RoutingState();
-
             if (cleanNavigationStack)
             {
-                Router
+                HostScreen
+                    .Router
                     .NavigateAndReset
                     .Execute(routableViewModel)
                     .Subscribe();
             }
             else
             {
-                Router
+                HostScreen
+                    .Router
                     .Navigate
                     .Execute(routableViewModel)
                     .Subscribe();
             }
         }
 
-        public void NavigateBak()
+        public void NavigateBack()
         {
-            Router = new RoutingState();
-
-            Router
+            HostScreen
+                .Router
                 .NavigateBack
                 .Execute()
                 .Subscribe();
