@@ -13,7 +13,7 @@ namespace DominicanWhoCodes.Controls
         }
 
         public static readonly BindableProperty NavigationTitleProperty =
-            BindableProperty.Create("NavigationTitle", typeof(string), typeof(CustomTitleView), "", propertyChanged: OnNavigationTitleChanged);
+            BindableProperty.Create("NavigationTitle", typeof(string), typeof(CustomTitleView), string.Empty, propertyChanged: OnNavigationTitleChanged);
 
 
         public CustomTitleView()
