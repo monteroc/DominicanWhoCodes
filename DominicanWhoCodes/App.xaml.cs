@@ -1,22 +1,26 @@
 ﻿using System;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace DominicanWhoCodes
 {
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
         AppBootstrapper bootstrapper;
         public App()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
-        protected override  void OnStart()
+        protected override void OnStart()
         {
             bootstrapper = new AppBootstrapper();
 
-            MainPage = bootstrapper.CreateMainPage();
+            var mainPage = (Xamarin.Forms.NavigationPage)bootstrapper.CreateMainPage();
+
+            MainPage = mainPage;
         }
 
         protected override void OnSleep()

@@ -68,6 +68,7 @@
     <Compile Include="PlatformApis\StatusBarConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\ShadowNavigationBarRenderer.cs" />
+    <Compile Include="Renderers\SearchPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
