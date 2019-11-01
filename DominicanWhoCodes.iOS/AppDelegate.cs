@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using FFImageLoading.Forms.Platform;
 using Foundation;
+using Sharpnado.Presentation.Forms.iOS;
 using UIKit;
 
 namespace DominicanWhoCodes.iOS
@@ -22,7 +23,12 @@ namespace DominicanWhoCodes.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+
             global::Xamarin.Forms.Forms.Init();
+
+            CachedImageRenderer.Init();
+            CachedImageRenderer.InitImageSourceHandler();
+            SharpnadoInitializer.Initialize();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

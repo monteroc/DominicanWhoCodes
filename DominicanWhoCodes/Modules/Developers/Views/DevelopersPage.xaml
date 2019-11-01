@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rxui:ReactiveContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          x:TypeArguments="vm:DevelopersViewModel"
+                          xmlns:rxui="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+                          xmlns:vm="clr-namespace:DominicanWhoCodes.Modules.Developers.ViewModels"
+                          xmlns:cell="clr-namespace:DominicanWhoCodes.Modules.Developers.Views.Cells"
+                          xmlns:view="clr-namespace:DominicanWhoCodes.Controls"                          
+                          x:Class="DominicanWhoCodes.Modules.Developers.Views.DevelopersPage"
+                          NavigationPage.BackButtonTitle="Developers"
+                          x:Name="developersPage">
+    <NavigationPage.TitleView>
+        <view:CustomTitleView x:Name="navTitle" VerticalOptions="Center"/>
+    </NavigationPage.TitleView>
+    <ListView x:Name="developersList"
+                BackgroundColor="LightGray"                
+                SeparatorVisibility="None"
+                ItemSelected="Handle_ItemSelected"
+                HasUnevenRows="True">
+        <ListView.ItemTemplate>
+            <DataTemplate>                    
+                <cell:DeveloperCell/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</rxui:ReactiveContentPage>

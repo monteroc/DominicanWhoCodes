@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rxui:ReactiveContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          x:TypeArguments="vm:DeveloperDetailsViewModel"
+                          xmlns:rxui="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+                          xmlns:vm="clr-namespace:DominicanWhoCodes.Modules.Developers.ViewModels"
+                          xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:pcView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                          xmlns:view="clr-namespace:DominicanWhoCodes.Controls"
+                          NavigationPage.HasNavigationBar="False"                        
+                          BackgroundColor="White"
+                          xmlns:converters="clr-namespace:DominicanWhoCodes.Helpers.Converters"
+                          xmlns:control="clr-namespace:DominicanWhoCodes.Modules.Developers.Controls"
+                          x:Class="DominicanWhoCodes.Modules.Developers.Views.DeveloperDetailsPage">    
+    <rxui:ReactiveContentPage.Resources>
+        <converters:NullToBooleanConverter x:Key="NullToBooleanConverter" />        
+    </rxui:ReactiveContentPage.Resources>
+        <Grid RowSpacing="15" Padding="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <pcView:PancakeView Padding="0" HorizontalOptions="FillAndExpand"
+                                    CornerRadius="0" VerticalOptions="FillAndExpand" IsClippedToBounds="True">
+                <ffimageloading:CachedImage Aspect="AspectFill"
+                                            Source="{Binding Developer.AbsoluteImageUrl}">
+                </ffimageloading:CachedImage>
+            </pcView:PancakeView>
+            <Grid HorizontalOptions="Start" VerticalOptions="Start" Padding="{OnPlatform Android='10,30,5,5',iOS='15,40,5,5'}" >
+                <BoxView HeightRequest="40" WidthRequest="40" CornerRadius="20" BackgroundColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <ffimageloading:CachedImage Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center"
+                                            Source="back">                    
+                </ffimageloading:CachedImage>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="backBtn"/>
+                </Grid.GestureRecognizers> 
+            </Grid>
+            <Grid Grid.Row="1" RowSpacing="10" ColumnSpacing="0" Padding="10,0,10,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <view:RoundInitialsView Grid.Row="0" Grid.Column="0" NameInitials="{Binding Developer.Initials}" />
+
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Developer.Name}"
+                       TextColor="Black" FontSize="Title"
+                       VerticalOptions="CenterAndExpand"/>
+
+                <Grid Grid.Row="1" Grid.ColumnSpan="2" Padding="0,5" ColumnSpacing="0" HorizontalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <control:SocialIcon  x:Name="gitImage"
+                                                 HorizontalOptions="End"
+                                                 IsVisible="{Binding Developer.Github, Converter={StaticResource NullToBooleanConverter}}"
+                                                 CommandParameter="{Binding Developer.Github}" 
+                                                 SocialImageSource="git" Grid.Column="0" />
+
+                    <control:SocialIcon  x:Name="twitterImage"
+                                                 HorizontalOptions="End"
+                                                 IsVisible="{Binding Developer.Twitter, Converter={StaticResource NullToBooleanConverter}}"
+                                                 CommandParameter="{Binding Developer.Twitter}"
+                                                 SocialImageSource="twitter" Grid.Column="1" />
+
+                    <control:SocialIcon  x:Name="linkedinImage"
+                                                 HorizontalOptions="End"
+                                                 IsVisible="{Binding Developer.LinkedIn, Converter={StaticResource NullToBooleanConverter}}"
+                                                 CommandParameter="{Binding Developer.LinkedIn}" 
+                                                 SocialImageSource="linkedin" Grid.Column="2" />
+
+                    <control:SocialIcon  x:Name="webImage"
+                                                 HorizontalOptions="End"
+                                                 IsVisible="{Binding Developer.Webpage, Converter={StaticResource NullToBooleanConverter}}"
+                                                 CommandParameter="{Binding Developer.Webpage}"
+                                                 SocialImageSource="web" Grid.Column="3" />
+                </Grid>
+
+                <view:SkillsView x:Name="displaySkills" Margin="0,2" Grid.Row="2" Grid.ColumnSpan="2"
+                                 SkillsSource="{Binding Developer.DisplaySkills}"/>
+
+                <Label Grid.Row="3" Grid.ColumnSpan="2" Margin="5,0,0,0" Text="{Binding Developer.Summary}"
+                       TextColor="Black" FontSize="Medium" VerticalOptions="StartAndExpand"/>              
+            </Grid>
+        </Grid>
+</rxui:ReactiveContentPage>
