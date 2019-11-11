@@ -19,6 +19,11 @@ namespace DominicanWhoCodes.Modules.Developers.Views
                 disposables =>
                 {
                     this.OneWayBind(this.ViewModel,
+                                  x => x.IsBusy,
+                                  x => x.developersList.IsRefreshing)
+                                  .DisposeWith(disposables);
+
+                    this.OneWayBind(this.ViewModel,
                        x => x.Developers,
                        x => x.developersList.ItemsSource)
                     .DisposeWith(disposables);
@@ -34,11 +39,11 @@ namespace DominicanWhoCodes.Modules.Developers.Views
                    .DisposeWith(disposables);
 
                 });
-        }      
+        }
 
         protected override void OnAppearing()
         {
-            ViewModel.UpdateStatusbar();         
+            ViewModel.UpdateStatusbar();
         }
 
         void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)

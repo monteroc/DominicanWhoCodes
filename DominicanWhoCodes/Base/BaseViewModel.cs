@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DominicanWhoCodes.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -12,6 +13,9 @@ namespace DominicanWhoCodes.Base
 
         [Reactive]
         public string Title { get; set; }
+
+        [Reactive]
+        public bool IsBusy { get; set; }
 
         public BaseViewModel(IScreen hostScreen = null)
         {
@@ -49,6 +53,14 @@ namespace DominicanWhoCodes.Base
                 .NavigateBack
                 .Execute()
                 .Subscribe();
+        }
+
+        public void ObservableCollectionCallback(IEnumerable collection, object context, Action accessMethod, bool writeAccess)
+        {
+            lock (collection)
+            {
+                accessMethod?.Invoke();
+            }
         }
     }
 }
