@@ -25,11 +25,15 @@ namespace DominicanWhoCodes.Modules.Developers.ViewModels
     {
         private readonly IApiService _apiService;
         private readonly IStatusBarConfig _statusBarConfig;
+        private IEnumerable<Developer> _developersContainer;
+
+        public ObservableCollection<Developer> Developers { get; } = new ObservableCollection<Developer>();
 
         [Reactive]
         public Developer SelectedDeveloper { get; set; }
 
-        public ObservableCollection<Developer> Developers { get; } = new ObservableCollection<Developer>();
+        [Reactive]
+        public string SearchText { get; set; }
 
         public DevelopersViewModel(IApiService apiService, IStatusBarConfig statusBarConfig)
         {
@@ -44,13 +48,13 @@ namespace DominicanWhoCodes.Modules.Developers.ViewModels
 
         private void SetCollectionThreadSafe<T>(ObservableCollection<T> collection) => BindingBase.EnableCollectionSynchronization(collection, null, ObservableCollectionCallback);
 
-        public async void LoadData()
+        public  void LoadData()
         {
             Title = AppConstant.AppName;
 
             IsBusy = true;
 
-            await GetDevelopersAsync();
+            GetDevelopersAsync().ConfigureAwait(false);
 
             IsBusy = false;
         }
@@ -60,11 +64,14 @@ namespace DominicanWhoCodes.Modules.Developers.ViewModels
             this.WhenAnyValue(x => x.SelectedDeveloper)
                 .Where(x => x != null)
                 .Subscribe(NavigateToDeveloperDetailPage);
+
+            this.WhenAnyValue(x => x.SearchText)
+                            .Subscribe(FilterDeveloper);
         }
 
         private async Task GetDevelopersAsync()
         {
-            var _developers = LoadDevelopersAsync().ConfigureAwait(true);
+            var _developers = LoadDevelopersAsync().ConfigureAwait(false);
 
             await foreach (var dev in _developers)
             {
@@ -72,17 +79,14 @@ namespace DominicanWhoCodes.Modules.Developers.ViewModels
             }
         }
 
-        private void NavigateToDeveloperDetailPage(Developer developer) => NavigateToPage(new DeveloperDetailsViewModel(developer, _statusBarConfig));
-
-        private void InsertIntoCollection<T>(in ObservableCollection<T> collection, in T modelToInsert) => collection.Add(modelToInsert);
-
         private async IAsyncEnumerable<Developer> LoadDevelopersAsync()
         {
-            var data = await _apiService.DWCApi.GetDevelopers().ConfigureAwait(false);
+            var data = await _apiService.DWCApi.GetDevelopers();
 
             var index = 0;
             var _count = data.Count();
 
+            _developersContainer = data;
             while (data.Any() && _count > 0)
             {
                 yield return data.ElementAt(index);
@@ -90,6 +94,27 @@ namespace DominicanWhoCodes.Modules.Developers.ViewModels
                 _count--;
             }
         }
+
+        private void FilterDeveloper(string name)
+        {
+            var _data = _developersContainer;
+            var showAll = string.IsNullOrWhiteSpace(name);
+
+            if (_data != null)
+            {
+                Developers.Clear();
+                var _filteredList = _data.Where(x => showAll || x.Name.ToLower().Contains(name.ToLower()));
+
+                foreach (var dev in _filteredList)
+                {
+                    InsertIntoCollection(Developers, dev);
+                }
+            }
+        }
+
+        private void NavigateToDeveloperDetailPage(Developer developer) => NavigateToPage(new DeveloperDetailsViewModel(developer, _statusBarConfig));
+
+        private void InsertIntoCollection<T>(in ObservableCollection<T> collection, in T modelToInsert) => collection.Add(modelToInsert);
 
         public void UpdateStatusbar() => _statusBarConfig.DisableFloatingStatusBar();
     }
