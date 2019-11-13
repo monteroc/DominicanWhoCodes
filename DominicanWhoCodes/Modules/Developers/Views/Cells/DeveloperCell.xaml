@@ -1,12 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
           xmlns:pcView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-          xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
           xmlns:view="clr-namespace:DominicanWhoCodes.Controls"
           x:Class="DominicanWhoCodes.Modules.Developers.Views.Cells.DeveloperCell">
-    <ViewCell.View>   
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+           <VisualState x:Name="Normal" />
+            <VisualState x:Name="Selected">
+                <VisualState.Setters>
+                    <Setter Property="BackgroundColor"
+                            Value="Gray" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
     <pcView:PancakeView Padding="0" Margin="15,10" BackgroundColor="White"
                         HasShadow="False" CornerRadius="5">  
         <Grid RowSpacing="15">
@@ -34,5 +43,4 @@
                             Grid.Column="1" Padding="0,5,0,10" VerticalOptions="Center"/>           
         </Grid>
     </pcView:PancakeView>
-    </ViewCell.View>
-</ViewCell>
+</Grid>

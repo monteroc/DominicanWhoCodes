@@ -12,15 +12,19 @@
     <NavigationPage.TitleView>
         <view:CustomTitleView x:Name="navTitle" VerticalOptions="Center"/>
     </NavigationPage.TitleView>
-    <ListView x:Name="developersList"
-                BackgroundColor="LightGray"                
-                SeparatorVisibility="None"
-                ItemSelected="Handle_ItemSelected"
-                HasUnevenRows="True">
-        <ListView.ItemTemplate>
-            <DataTemplate>                    
-                <cell:DeveloperCell/>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <Grid>
+        <CollectionView x:Name="developersList"
+                    SelectionMode="Single"
+                    BackgroundColor="LightGray">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>  
+                    <cell:DeveloperCell/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ActivityIndicator x:Name="activityIndicator" 
+                           HeightRequest="35"
+                           VerticalOptions="Start" 
+                           Color="Black"/>
+    </Grid>
 </rxui:ReactiveContentPage>
