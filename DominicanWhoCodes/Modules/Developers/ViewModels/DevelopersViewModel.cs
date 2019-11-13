@@ -48,13 +48,13 @@ namespace DominicanWhoCodes.Modules.Developers.ViewModels
 
         private void SetCollectionThreadSafe<T>(ObservableCollection<T> collection) => BindingBase.EnableCollectionSynchronization(collection, null, ObservableCollectionCallback);
 
-        public  void LoadData()
+        public async void LoadData()
         {
             Title = AppConstant.AppName;
 
             IsBusy = true;
 
-            GetDevelopersAsync().ConfigureAwait(false);
+            await GetDevelopersAsync();
 
             IsBusy = false;
         }

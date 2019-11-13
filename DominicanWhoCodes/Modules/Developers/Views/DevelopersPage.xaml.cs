@@ -5,11 +5,7 @@ using System.Reactive.Linq;
 using DominicanWhoCodes.Controls;
 using DominicanWhoCodes.Modules.Developers.ViewModels;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using ReactiveUI.XamForms;
-using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace DominicanWhoCodes.Modules.Developers.Views
 {
@@ -25,7 +21,12 @@ namespace DominicanWhoCodes.Modules.Developers.Views
                 {
                     this.OneWayBind(this.ViewModel,
                       x => x.IsBusy,
-                      x => x.developersList.IsRefreshing)
+                      x => x.activityIndicator.IsRunning)
+                      .DisposeWith(disposables);
+
+                    this.OneWayBind(this.ViewModel,
+                      x => x.IsBusy,
+                      x => x.activityIndicator.IsVisible)
                       .DisposeWith(disposables);
 
                     this.OneWayBind(this.ViewModel,
@@ -49,16 +50,10 @@ namespace DominicanWhoCodes.Modules.Developers.Views
 
         public void OnSearchBarTextChanged(string text) => SearchBarTextChanged?.Invoke(this, text);
 
-        void HandleSearchBarTextChanged(object sender, string searchBarText)=> ViewModel.SearchText = searchBarText;
+        void HandleSearchBarTextChanged(object sender, string searchBarText) => ViewModel.SearchText = searchBarText;
 
-        protected override void OnAppearing()=> ViewModel.UpdateStatusbar();   
+        protected override void OnAppearing() => ViewModel.UpdateStatusbar();
 
-        void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
-        {
-            // This is to avoid the orange on selected background color on android
-            if (e.SelectedItem == null) return;
-
-            ((Xamarin.Forms.ListView)sender).SelectedItem = null;
-        }
+        protected override void OnDisappearing() => ViewModel.SelectedDeveloper = null;
     }
 }
